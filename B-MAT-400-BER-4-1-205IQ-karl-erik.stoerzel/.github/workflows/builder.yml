@@ -1,0 +1,21 @@
+name: builder
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: run
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: check binary
+      run: ls | grep "205IQ"
+    - name: run pdf tests
+      run: ./tests_pdf.sh
+    - name: run own tests
+      run: ./own_tests.sh
+    - name: run error handling tests
+      run: ./error_handling.sh
+    - name: remove useless files
+      run: rm str1

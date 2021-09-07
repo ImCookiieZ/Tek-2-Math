@@ -1,0 +1,21 @@
+name: builder
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: run
+    runs-on: ubuntu-latest
+    steps:
+    - name: install ploty
+      run: pip install plotly==4.14.3
+    - name: install pip
+      run: pip install pandas
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: check binary
+      run: ls | grep "207demography"
+    - name: run errohandling tests
+      run: ./error_handling.sh
+    - name: run tests
+      run: ./test.sh
